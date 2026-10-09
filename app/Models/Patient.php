@@ -1,23 +1,22 @@
 <?php
 
 namespace App\Models;
-use App\Models\Appointment;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Patient extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'student_id',
         'name',
-        'course',
-        'year_level'
+        'email',
+        'phone',
+        'birthdate',
+        'address',
     ];
 
-    public function appointments() {
-     return $this->hasMany(Appointment::class);
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
     }
 }

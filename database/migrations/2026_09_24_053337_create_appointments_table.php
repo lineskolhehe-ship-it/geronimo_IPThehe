@@ -9,22 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('appointments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('patient_id')
-            ->constrained()
-            ->cascadeOnDelete();
-             $table->foreignId('doctor_id')
-            ->constrained()
-            ->cascadeOnDelete();
-
-            $table->date('appointment_date');
-            $table->string('status');
-            $table->timestamps();
-        });
-    }
+ public function up(): void
+{
+    Schema::create('appointments', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('patient_id')->constrained()->onDelete('cascade');
+        $table->date('appointment_date');
+        $table->time('appointment_time');
+        $table->string('reason')->nullable();
+        $table->string('status')->default('Pending');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
